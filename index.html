@@ -1,0 +1,412 @@
+<h1>Welcome to the IronPythonRunner wiki!</h1>
+
+<h2>欢迎来到IronPythonRunner文档</h2>
+
+<h2>一、说明</h2>
+
+<p>不同于Twoone3的CpythonRunner，</p>
+
+<p>IronPythonRunner采用.NET框架下的IronPython解释器</p>
+
+<p>使用之前,请确保您已了解了IronPython的语法,可参考 <a href="https://ironpython.net">IronPython.org</a></p>
+
+<p>为什么选择IronPython?</p>
+
+<ul><li><p>IronPython是对.NET Framework的一个极好的补充，它为Python开发人员提供了.NET Framework的强大功能。现有的.NET开发人员也可以使用IronPython作为一种快速而富有表现力的脚本语言，从零开始嵌入、测试或编写新的应用程序。</p></li><li><p>CLR是创建编程语言的一个很好的平台，而DLR使动态语言变得更好。此外，.NETFramework（基类库、演示基础等）为开发者提供了惊人的功能和能力。</p></li></ul>
+
+<h2>二、API定义接口</h2>
+   <span class="string">注意：此页面信息过于陈旧且更新较慢，如需最新开发文档，请参考：</span>
+   <a href="https://github.com/Sbaoor-fly/CSR-IronPythonRunner/wiki">IronPythonRunner/wiki</a><br/>
+
+<h3>通用数据处理</h3>
+
+<p>(1) <code>mc.WriteAllText(path,text)</code></p>
+
+<ul><li>覆盖式写入文件</li></ul>
+
+<p>(2) <code>mc.AppendAllText(path,text)</code></p>
+
+<ul><li>向文件中追加写入</li></ul>
+
+<p>(3) <code>mc.ReadAllLine(path)</code></p>
+
+<ul><li>返回一个list，每个value为文件的每一行</li></ul>
+
+<p>(4) <code>mc.ShareData(key,value)</code></p>
+
+<ul><li>设置一个共享数据,共享成功返回0，不成功返回1</li></ul>
+
+<p>(5) <code>mc.GetShareData(key)</code></p>
+
+<ul><li>获得一个共享数据,若无key则返回1</li></ul>
+
+<p>(6) <code>mc.ChangeShareData</code></p>
+
+<ul><li>修改共享数据,修改成功返回0，不成功返回1</li></ul>
+
+<p>(7) <code>mc.RemoveShareData(key)</code></p>
+
+<ul><li>移除共享数据,移除成功返回0，不成功返回1</li></ul>
+
+<p>(8) <code>mc.WriteInfo(PluginName,msg)</code></p>
+
+<ul><li>以INFO格式向控制台输出</li></ul>
+
+<p>(9) <code>mc.WriteWarn(PluginName,msg)</code></p>
+
+<ul><li>以WARN格式向控制台输出</li></ul>
+
+<p>(10) <code>mc.WorkingPath()</code></p>
+
+<ul><li>返回BDS完整工作路径</li></ul>
+
+<p>(11) <code>mc.HttpPost(Url,DataStr)</code></p>
+
+<ul><li>发起一个非异步HttpPost请求</li></ul>
+
+<p>(12) <code>mc.HttpGet(Url,DataStr)</code></p>
+
+<ul><li>发起一个非异步HttpGet请求</li></ul>
+
+<p>(13) <code>mc.CreateDir(path)</code></p>
+
+<ul><li>创建文件夹</li></ul>
+
+<p>(14) <code>mc.IfFile(path)</code></p>
+
+<ul><li>返回一个bool值判断文件是否存在</li></ul>
+
+<p>(15) <code>mc.IfDir(path)</code></p>
+
+<ul><li>返回一个bool值判断文件夹是否存在</li></ul>
+
+<h3>MC玩家互动相关功能</h3>
+
+<p>(1) <code>mc.runcmd(cmd)</code></p>
+
+<ul><li>执行后台命令</li></ul>
+
+<p>(2) <code>mc.MCCSAPIVERSION()</code></p>
+
+<ul><li>返回CSR版本</li></ul>
+
+<p>(3) <code>mc.logout(msg)</code></p>
+
+<ul><li>向控制台输出</li></ul>
+
+<p>(4) <code>mc.getOnLinePlayers()</code></p>
+
+<ul><li>获取在线玩家</li></ul>
+
+<p>(5) <code>mc.getPlayerAbilities(uuid)</code></p>
+
+<ul><li>获取uuid对应玩家能力表</li></ul>
+
+<p>(6) <code>mc.getPlayerAttributes(uuid)</code></p>
+
+<ul><li>获取uuid对应玩家属性表</li></ul>
+
+<p>(7) <code>mc.getPlayerEffects(uuid)</code></p>
+
+<ul><li>获取uuid对应玩家所有效果表</li></ul>
+
+<p>(8) <code>mc.getscoreboard(uuid,scoreboardname)</code></p>
+
+<ul><li>获取对应uuid玩家特定计分板的数值</li></ul>
+
+<p>(9) <code>mc.addPlayerItem(uuid,id,aux ,count)</code>	</p>
+
+<ul><li>为uuid对应玩家添加特定物品id和特定特殊值的物品count个</li></ul>
+
+<p>(10) <code>mc.setCommandDescribe(key,descripition)</code></p>
+
+<ul><li>设置一个描述为description的key指令</li></ul>
+
+<p>(11) <code>mc.teleport(uuid,x,y,z,did)</code>		</p>
+
+<ul><li>传送uuid对应玩家到did维度的x,y,z处</li></ul>
+
+<p>(12) <code>mc. setPlayerBossBart(uuid,title,percent)</code>		</p>
+
+<ul><li>设置uuid对应玩家标题为title，血条百分比为percent的boss血条</li></ul>
+
+<p>(13) <code>mc.setPlayerSidebar(uuid,title,list)</code>	</p>
+
+<ul><li>设置uuid对应玩家侧边栏，标题为title，内容为json格式的list</li></ul>
+
+<p>(14) <code>mc.getPlayerItems(uuid)</code>		</p>
+
+<ul><li>获取uuid对应玩家物品</li></ul>
+
+<p>(15) <code>mc.setPlayerPermissionAndGametype(uuid, modes)</code></p>
+
+<ul><li>设置uuid对应玩家新游戏与权限模式</li></ul>
+
+<p>(16) <code>mc.disconnectClient(uuid,tips)</code>		</p>
+
+<ul><li>强制断开uuid对应玩家连接</li></ul>
+
+<p>(17) <code>mc.transferserver(uuid, addr, port)</code></p>
+
+<ul><li>传送uuid对应玩家到IP为addr的服务器port端口</li></ul>
+
+<p>(18) <code>mc.getPlayerMaxAttributes(uuid)</code>	</p>
+
+<ul><li>获取uuid对应玩家最大能力表</li></ul>
+
+<p>(19) <code>mc.tellraw(player,msg)</code></p>
+
+<ul><li>向对应玩家发送msg信息</li></ul>
+
+<p>(20) <code>mc.talkAs(uuid,msg)</code></p>
+
+<ul><li>模拟uuid对应玩家说一句话</li></ul>
+
+<p>(21) <code>mc.getPlayerMaxAttributes(uuid)</code></p>
+
+<ul><li>获取uuid对应玩家最大能力表</li></ul>
+
+<p>(22) <code>mc.sendSimpleForm(uuid,title,contest,buttons)</code></p>
+
+<ul><li>向uuid对应玩家发送一个简单的表单，返回表单id</li></ul>
+
+<p>(23) <code>mc.releaseForm(formid)</code></p>
+
+<ul><li>放弃一个id为formid的表单</li></ul>
+
+<p>(24) <code>mc.removePlayerBossBar(uuid)</code></p>
+
+<ul><li>清除uuid对应玩家boss血条</li></ul>
+
+<p>(25) <code>mc.removePlayerSidebar(uuid)</code></p>
+
+<ul><li>清除uuid对应玩家侧边栏</li></ul>
+
+<p>(26) <code>mc.sendCustomForm(uuid,json)</code></p>
+
+<ul><li>向uuid对应玩家发送一个自定义表单，返回表单id</li></ul>
+
+<p>(27) <code>mc.sendModalForm(uuid, title, contest, button1,button2)</code></p>
+
+<ul><li>向uuid对应玩家发送一个模式对话框，返回表单id</li></ul>
+
+<p>(28) <code>mc.setServerMotd(motd ,isshow)</code></p>
+
+<ul><li>设置服务器MOTD，isshow为一个bool值</li></ul>
+
+<p>(29) <code>mc.reName(uuid, name)</code></p>
+
+<ul><li>重命名一个玩家</li></ul>
+
+<p>(30) <code>mc.runcmdAs(uuid, command)</code></p>
+
+<ul><li>模拟玩家执行一个命令</li></ul>
+
+<p>(31) <code>mc.selectPlayer(uuid)</code></p>
+
+<ul><li>查询uuid对应玩家基本信息</li></ul>
+
+<h3>MC核心玩法相关功能</h3>
+
+<p>(1) <em>load_name</em></p>
+
+<pre><code>xuid —— 玩家对应xuid
+
+uuid ——玩家对应uuid
+
+playername —— 玩家名称
+
+ipport —— 玩家IP与端口</code></pre>
+
+<p>(2) <em>player_left</em></p>
+
+<pre><code>xuid —— 玩家对应xuid
+
+uuid ——玩家对应uuid
+
+playername —— 玩家名称
+
+ipport —— 玩家IP与端口</code></pre>
+
+<p>(3) <em>server_command</em></p>
+
+<pre><code>cmd —— 后台输入的指令</code></pre>
+
+<p>(4) <em>attack</em></p>
+
+<pre><code>actorname —— 被攻击实体名称
+
+dimensionid —— 玩家所在维度ID
+
+XYZ —— 玩家所处位置</code></pre>
+
+<p>(5) <em>inputtext</em></p>
+
+<pre><code>msg —— 输入的文本
+
+dimensionid —— 玩家所在维度ID
+
+XYZ —— 玩家所在位置</code></pre>
+
+<p>(6) <em>destroyblock</em></p>
+
+<pre><code>blockid —— 方块id
+
+XYZ —— 玩家所在位置
+
+position —— 方块所在位置
+
+blockname —— 方块名称</code></pre>
+
+<p>(7) <em>mobdie</em></p>
+
+<pre><code>scrname —— 伤害源名称
+
+mobname —— 实体名称
+
+dimensionid —— 生物所在维度ID
+
+playername —— 若为玩家死亡则附带此项</code></pre>
+
+<p>(8) <em>respawn</em></p>
+
+<pre><code>XYZ —— 玩家所在位置
+
+dimensionid —— 玩家所在维度ID
+
+playername —— 玩家名称</code></pre>
+
+<p>(9) <em>inputcommand</em></p>
+
+<pre><code>cmd —— 玩家输入的指令
+
+dimensionid —— 玩家所在维度ID
+
+playername —— 玩家名称
+
+XYZ —— 玩家所在位置</code></pre>
+
+<p>(10) <em>equippedarm</em></p>
+
+<pre><code>itemid —— 物品id
+
+itemcount —— 物品数量
+
+itemname —— 物品名字
+
+itemaux —— 物品特殊值
+
+solt —— 操作格子
+
+XYZ —— 玩家所在位置</code></pre>
+
+<p>(11) <em>formselect</em></p>
+
+<pre><code>formid —— 表单id
+
+selected —— 选择项
+
+uuid —— 玩家uuid
+
+playername —— 玩家名称</code></pre>
+
+<p>(12) <em>useitem</em></p>
+
+<pre><code> itemid —— 物品id
+
+itemcount —— 物品数量
+
+ itemname —— 物品名字
+
+itemaux —— 物品特殊值
+
+playername —— 玩家名称
+
+XYZ —— 玩家所在位置
+
+position —— 方块所在位置</code></pre>
+
+<p>(13) <em>placeblock</em></p>
+
+<pre><code>XYZ —— 玩家所在位置
+
+position —— 方块所在位置
+
+blockcount —— 方块数量
+
+blockname —— 方块名字</code></pre>
+
+<p>(14) <em>levelexplode</em></p>
+
+<pre><code>blockid —— 爆炸方块id
+
+entityid —— 爆炸实体id
+
+blockname —— 爆炸方块名称
+
+entityname—— 爆炸实体名称
+
+position —— 爆炸所在位置
+
+explodepower —— 爆炸强度
+
+dimensionid —— 爆炸所在维度ID</code></pre>
+
+<p>(15) <em>npccmd</em></p>
+
+<pre><code>npcname —— npc名称
+
+actionid —— 选择项
+
+actions —— 指令列表
+
+position —— npc所在位置
+
+entityid —— ncp实体id
+
+entityname —— npc实体名称
+
+dimensionid —— npc所在维度ID</code></pre>
+
+<p>(16) <em>pistonpush</em></p>
+
+<pre><code>targetposition —— 被推动的方块所在位置
+
+targetblockid —— 被推动的方块id
+
+targetblockname ——被推动的方块名称
+
+dimensionid —— 活塞所在维度ID
+
+blockid —— 活塞id
+
+blockname —— 活塞名称</code></pre>
+
+<p>(17) <em>blockcmd</em></p>
+
+<pre><code>cmd —— 执行的命令
+
+position —— 命令方块所在位置
+
+dimensionid —— 命令方块所在维度ID
+
+type —— 执行者类型
+
+tickdelay —— 执行间隔</code></pre>
+
+
+<h2>三、用BDS调试插件</h2>
+
+<p>IPYR加载插件的时候会以 <em>load_plugin()</em> 函数作为主入口</p>
+
+<p>如果插件里面没有这个函数，IPYR不会加载这个插件</p>
+
+<p>由于IPYR的特殊性，除了初始化ipy插件，在其他时候py插件出错不会提示错误信息</p>
+
+<p>这导致编写ipy插件对开发者的py编程水平要求很高</p>
+
+<p>但是这又怎么能难到我们呢？</p>
+
+<p>IPYR运行时可以用ipy reload来重载插件，</p>
+
+<p>不过需要注意热重载会清空共享数据，而且py插件内的变量会被清空。</p>
